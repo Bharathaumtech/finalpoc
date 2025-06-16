@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>mycompany_project</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\mycompany_project.Domain\mycompany_project.Domain.csproj" />
+    <ProjectReference Include="..\mycompany_project.Application.Contracts\mycompany_project.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Account.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Admin.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Public.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.Account.Pro.Shared.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="8.3.4" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="8.3.4" />
+  </ItemGroup>
+
+</Project>
