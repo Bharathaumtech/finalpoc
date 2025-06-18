@@ -22,6 +22,7 @@ import { ThemeLeptonXModule } from '@abp/ng.theme.lepton-x';
 import { SideMenuLayoutModule } from '@abp/ng.theme.lepton-x/layouts';
 import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -32,10 +33,12 @@ import { AccountLayoutModule } from '@abp/ng.theme.lepton-x/account';
     
     
     
+    
     InternetConnectionStatusComponent,
                    ThemeLeptonXModule.forRoot(),
                    SideMenuLayoutModule.forRoot(),
                    AccountLayoutModule.forRoot(),
+                   
   ],
   declarations: [AppComponent],
   providers: [
