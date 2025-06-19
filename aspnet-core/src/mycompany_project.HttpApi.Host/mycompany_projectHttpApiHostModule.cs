@@ -13,10 +13,9 @@ using mycompany_project.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Microsoft.OpenApi.Models;
-using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Account;
-using Volo.Abp.Account.Web;
+using Volo.Abp.Account.Pro.Public.Web;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -33,15 +32,11 @@ using Volo.Abp.VirtualFileSystem;
 namespace mycompany_project;
 
 [DependsOn(
-    typeof(mycompany_projectHttpApiModule),
+    typeof(AccountProPublicWeb),
     typeof(AbpAutofacModule),
-    typeof(AbpAspNetCoreMultiTenancyModule),
-    typeof(mycompany_projectApplicationModule),
-    typeof(mycompany_projectEntityFrameworkCoreModule),
-    typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
-    typeof(AbpAccountWebOpenIddictModule),
+    typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(AbpMultiTenancyModule),
 )]
 public class mycompany_projectHttpApiHostModule : AbpModule
 {
@@ -49,12 +44,7 @@ public class mycompany_projectHttpApiHostModule : AbpModule
     {
         PreConfigure<OpenIddictBuilder>(builder =>
         {
-            builder.AddValidation(options =>
-            {
-                options.AddAudiences("mycompany_project");
-                options.UseLocalServer();
-                options.UseAspNetCore();
-            });
+            
         });
     }
 
@@ -197,7 +187,7 @@ public class mycompany_projectHttpApiHostModule : AbpModule
         app.UseRouting();
         app.UseCors();
         app.UseAuthentication();
-        app.UseAbpOpenIddictValidation();
+        
 
         if (MultiTenancyConsts.IsEnabled)
         {

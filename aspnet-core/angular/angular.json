@@ -1,20 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"],
-    "defaultProject": "mycompany_project"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "mycompany_project": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -27,69 +18,46 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
+            "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-  "node_modules/@volo/ngx-lepton-x.lite/assets/css/bootstrap-dim.css",
-  "node_modules/@volo/ngx-lepton-x.lite/assets/css/ng-bundle.css",
-  "node_modules/@volo/ngx-lepton-x.lite/assets/css/side-menu/layout-bundle.css",
-  "node_modules/@abp/ng.theme.lepton-x/assets/css/abp-bundle.css",
-  "node_modules/@volo/ngx-lepton-x.lite/assets/css/font-bundle.css",
-  "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-  "src/styles.scss"
-],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "2.5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              ]
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mycompany_project:build"
+          },
           "configurations": {
             "production": {
-              "buildTarget": "mycompany_project:build:production"
-            },
-            "development": {
-              "buildTarget": "mycompany_project:build:development"
+              "browserTarget": "mycompany_project:build:production"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "mycompany_project:build"
+            "browserTarget": "mycompany_project:build"
           }
         },
         "test": {
@@ -99,11 +67,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
@@ -115,5 +80,6 @@
         }
       }
     }
-  }
+  },
+  "defaultProject": "mycompany_project"
 }
