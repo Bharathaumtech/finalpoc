@@ -11,7 +11,7 @@ namespace mycompany_project;
 
 [DependsOn(
     typeof(mycompany_projectDomainModule),
-    typeof(AbpAccountApplicationModule),
+    
     typeof(mycompany_projectApplicationContractsModule),
     typeof(AbpIdentityApplicationModule),
     typeof(AbpPermissionManagementApplicationModule),

@@ -12,7 +12,7 @@ namespace mycompany_project;
 
 [DependsOn(
     typeof(mycompany_projectDomainSharedModule),
-    typeof(AbpAccountApplicationContractsModule),
+   
     typeof(AbpAccountAdminApplicationContractsModule),
     typeof(AbpAccountPublicApplicationContractsModule),
     typeof(AbpAccountSharedApplicationContractsModule),

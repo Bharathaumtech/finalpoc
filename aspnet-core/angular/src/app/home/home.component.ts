@@ -1,5 +1,6 @@
 import { AuthService } from '@abp/ng.core';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,10 @@ export class HomeComponent {
     return this.authService.isAuthenticated;
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    @Inject(DOCUMENT) private document: Document // Injecting DOCUMENT properly
+  ) {}
 
   login() {
     this.authService.navigateToLogin();

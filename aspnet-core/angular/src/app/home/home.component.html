@@ -3,15 +3,15 @@
     <div class="card h-lg-100 w-100 overflow-hidden">
       <div class="card-body">
         <div class="starting-content">
-          @if(!hasLoggedIn){
-          <h3>Welcome</h3>
-          <p class="lead text-muted mb-2">
-            {{ '::LongWelcomeMessage' | abpLocalization }}
-          </p>
-          <a (click)="login()" class="px-4 btn btn-primary mb-4" role="button"
-            ><i class="fa fa-sign-in"></i> {{ 'AbpAccount::Login' | abpLocalization }}</a
-          >
-          }
+          <ng-container *ngIf="!hasLoggedIn">
+            <h3>Welcome</h3>
+            <p class="lead text-muted mb-2">
+              {{ '::LongWelcomeMessage' | abpLocalization }}
+            </p>
+            <a (click)="login()" class="px-4 btn btn-primary mb-4" role="button">
+              <i class="fa fa-sign-in"></i> {{ 'AbpAccount::Login' | abpLocalization }}
+            </a>
+          </ng-container>
 
           <h3>Getting Started</h3>
           <ng-container
@@ -19,8 +19,7 @@
               startingContentTemplate;
               context: {
                 $implicit: {
-                  description:
-                    'Learn how to create and run a new web application using the application startup template.',
+                  description: 'Learn how to create and run a new web application using the application startup template.',
                   href: 'https://abp.io/docs/latest/get-started',
                   label: 'Getting Started'
                 }
@@ -34,8 +33,7 @@
               startingContentTemplate;
               context: {
                 $implicit: {
-                  description:
-                    'Learn how to build an ABP based web application named Acme.BookStore.',
+                  description: 'Learn how to build an ABP based web application named Acme.BookStore.',
                   href: 'https://abp.io/docs/latest/tutorials/book-store/part-01?UI=NG&DB=EF',
                   label: 'Explore Tutorial'
                 }
@@ -57,44 +55,31 @@
       </div>
     </div>
   </div>
+
   <div class="col-xl-3 col-md-6 d-flex">
     <div class="row">
-      <ng-container
-        *ngTemplateOutlet="
-          visitLinkTemplate;
-          context: {
-            $implicit: {
-              label: 'Visit Support',
-              description:
-                'You can check for similar problems and solutions, or open a new topic to discuss your specific issue.',
-              href: 'https://abp.io/support/questions',
-              card: 'card overflow-hidden',
-              imgClass: '',
-              imgSrc: 'assets/images/getting-started/img-support.png',
-              logo: 'abp-support abp-logo mb-2'
-            }
-          }
-        "
-      ></ng-container>
-      <ng-container
-        *ngTemplateOutlet="
-          visitLinkTemplate;
-          context: {
-            $implicit: {
-              label: 'Visit Blog',
-              description:
-                'You can find content on .NET development, cross-platform, ASP.NET application templates, ABP-related news, and more.',
-              href: 'https://abp.io/blog',
-              card: 'card h-md-100 overflow-hidden',
-              imgClass: 'margin-bottom: -24px',
-              imgSrc: 'assets/images/getting-started/img-blog.png',
-              logo: 'abp-blog abp-logo mb-2'
-            }
-          }
-        "
-      ></ng-container>
+      <ng-container *ngTemplateOutlet="visitLinkTemplate; context: { $implicit: {
+          label: 'Visit Support',
+          description: 'You can check for similar problems and solutions, or open a new topic to discuss your specific issue.',
+          href: 'https://abp.io/support/questions',
+          card: 'card overflow-hidden',
+          imgClass: '',
+          imgSrc: 'assets/images/getting-started/img-support.png',
+          logo: 'abp-support abp-logo mb-2'
+        } }"></ng-container>
+
+      <ng-container *ngTemplateOutlet="visitLinkTemplate; context: { $implicit: {
+          label: 'Visit Blog',
+          description: 'You can find content on .NET development, cross-platform, ASP.NET application templates, ABP-related news, and more.',
+          href: 'https://abp.io/blog',
+          card: 'card h-md-100 overflow-hidden',
+          imgClass: 'margin-bottom: -24px',
+          imgSrc: 'assets/images/getting-started/img-blog.png',
+          logo: 'abp-blog abp-logo mb-2'
+        } }"></ng-container>
     </div>
   </div>
+
   <div class="col-xl-3 col-md-6 d-flex">
     <div class="card h-100 overflow-hidden">
       <div class="card-body">
@@ -104,17 +89,17 @@
           <span class="fw-bold">ABP Lovers!</span>
         </p>
         <p class="text-muted mb-2">
-          Explore all ABP users' experiences with the ABP Framework, discover articles and videos on
-          how to use ABP, and join raffles for a chance to win surprise gifts!
+          Explore all ABP users' experiences with the ABP Framework, discover articles and videos on how to use ABP, and join raffles for a chance to win surprise gifts!
         </p>
-        <a class="btn btn-brand soft mb-3" href="https://abp.io/community/" target="_blank"
-          >Join ABP Community</a
-        >
+        <a class="btn btn-brand soft mb-3" href="https://abp.io/community/" target="_blank">
+          Join ABP Community
+        </a>
       </div>
       <img class="mt-3" src="assets/images/getting-started/img-community.png" />
     </div>
   </div>
 </div>
+
 <div class="row">
   <ng-container
     *ngTemplateOutlet="
@@ -162,12 +147,13 @@
               iconClass: 'rounded-circle me-2 flex-center bg-brand soft',
               title: 'FAQ',
               link: 'https://abp.io/faq',
-            },
+            }
           ]
         }
       }
     "
   ></ng-container>
+
   <div class="col-xl-6 col-lg-8 d-flex">
     <div class="card">
       <div class="card-body d-flex">
@@ -176,8 +162,7 @@
             <p class="text-muted mb-0">THE OFFICIAL GUIDE</p>
             <h3>Mastering ABP Framework</h3>
             <p class="text-muted">
-              Written by the creator of the ABP Framework, this book will help you gain a complete
-              understanding of the framework and modern web application development techniques.
+              Written by the creator of the ABP Framework, this book will help you gain a complete understanding of the framework and modern web application development techniques.
             </p>
             <div class="d-md-flex mb-2 mb-md-0">
               <a
@@ -203,6 +188,7 @@
       </div>
     </div>
   </div>
+
   <ng-container
     *ngTemplateOutlet="
       tableTemplate;
@@ -274,23 +260,19 @@
         <div class="table-responsive">
           <table class="table mb-0">
             <tbody>
-              @for(item of context.items; track $index; let last = $last){
-              <tr>
+              <tr *ngFor="let item of context.items; let last = last">
                 <td class="ps-0 d-flex" [class.border-bottom-0]="last">
-                  @if(item.icon){
                   <div
+                    *ngIf="item.icon"
                     [ngClass]="item.iconClass"
                     [style]="item.style ? 'width: 20px; height: 20px' : ''"
                   >
-                    @if(item.iconType === 'image'){
-                    <img [src]="item.icon" class="me-2" />
-                    }@else if(item.iconType === 'icon'){
-                    <i [class]="item.icon"></i>
-                    }@else{
-                    <div [class]="item.icon"></div>
-                    }
+                    <ng-container [ngSwitch]="item.iconType">
+                      <img *ngSwitchCase="'image'" [src]="item.icon" class="me-2" />
+                      <i *ngSwitchCase="'icon'" [class]="item.icon"></i>
+                      <div *ngSwitchDefault [class]="item.icon"></div>
+                    </ng-container>
                   </div>
-                  }
                   <div>{{ item.title }}</div>
                 </td>
                 <td class="text-end pe-0 opacity-25" [class.border-bottom-0]="last">
@@ -299,7 +281,6 @@
                   </a>
                 </td>
               </tr>
-              }
             </tbody>
           </table>
         </div>

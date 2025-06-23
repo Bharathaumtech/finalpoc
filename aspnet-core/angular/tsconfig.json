@@ -5,28 +5,24 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "esModuleInterop": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "target": "ES2022",                 // ✅ Angular 16+ supports ES2022
+    "module": "es2020",                 // ✅ OK with Angular build system
+    "lib": ["es2018", "dom"],           // ✅ Can upgrade to es2020 if needed
     "paths": {
-      "@proxy": [
-        "src/app/proxy/index.ts"
-      ],
-      "@proxy/*": [
-        "src/app/proxy/*"
-      ]
+      "@proxy": ["src/app/proxy/index.ts"],
+      "@proxy/*": ["src/app/proxy/*"]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false    // ✅ Still compatible with Angular 18
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,     // 👍 Recommended
+    "strictInputAccessModifiers": true,    // 👍 Recommended
+    "strictTemplates": true                // 👍 Optional but improves type safety
   }
 }

@@ -3,10 +3,18 @@ using Volo.Abp.AspNetCore.Mvc;
 
 namespace mycompany_project.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class HomeController : AbpController
 {
-    public ActionResult Index()
+    //public ActionResult Index()
+    //{
+    //    return Redirect("~/swagger");
+    //}
+
+    [HttpGet("ping")]
+    public IActionResult Ping()
     {
-        return Redirect("~/swagger");
+        return Ok("Hello from ABP Swagger!");
     }
 }

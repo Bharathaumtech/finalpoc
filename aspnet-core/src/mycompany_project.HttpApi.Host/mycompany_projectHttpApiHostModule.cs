@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,8 +14,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
-using Volo.Abp.Account;
-using Volo.Abp.Account.Pro.Public.Web;
+using Volo.Abp.Account.Pro.Public;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -28,16 +27,23 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.MultiTenancy;
+using Volo.Abp.Account.Pro.Public.Web;
+
+
 
 namespace mycompany_project;
 
 [DependsOn(
-    typeof(AccountProPublicWeb),
+   
     typeof(AbpAutofacModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpMultiTenancyModule),
+    typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule)
+    
 )]
+
 public class mycompany_projectHttpApiHostModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -64,7 +70,7 @@ public class mycompany_projectHttpApiHostModule : AbpModule
 
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
-        context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+        
         context.Services.Configure<AbpClaimsPrincipalFactoryOptions>(options =>
         {
             options.IsDynamicClaimsEnabled = true;
@@ -93,9 +99,12 @@ public class mycompany_projectHttpApiHostModule : AbpModule
             options.RedirectAllowedUrls.AddRange(configuration["App:RedirectAllowedUrls"]?.Split(',') ?? Array.Empty<string>());
 
             options.Applications["Angular"].RootUrl = configuration["App:ClientUrl"];
-            options.Applications["Angular"].Urls[AccountUrlNames.PasswordReset] = "account/reset-password";
+            options.Applications["Angular"].Urls["PasswordReset"] = "account/reset-password";
+
+
         });
     }
+
 
     private void ConfigureVirtualFileSystem(ServiceConfigurationContext context)
     {
@@ -140,8 +149,13 @@ public class mycompany_projectHttpApiHostModule : AbpModule
             options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "mycompany_project API", Version = "v1" });
-                options.DocInclusionPredicate((docName, description) => true);
-                options.CustomSchemaIds(type => type.FullName);
+
+                // ✅ Safely avoid schema duplication issues
+                options.CustomSchemaIds(type =>
+                {
+                    var fullName = type.ToString();
+                    return fullName.Replace("+", ".").Replace("`", "").Replace("$", ".");
+                });
             });
     }
 

@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="8.3.4" />
+
     <PackageReference Include="Volo.Abp.Account.Pro.Admin.Application" Version="8.3.4" />
     <PackageReference Include="Volo.Abp.Account.Pro.Public.Application" Version="8.3.4" />
     <PackageReference Include="Volo.Abp.Account.Pro.Shared.Application" Version="8.3.4" />

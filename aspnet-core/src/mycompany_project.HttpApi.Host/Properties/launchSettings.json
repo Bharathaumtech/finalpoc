@@ -17,7 +17,7 @@
     },
     "mycompany_project.HttpApi.Host": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "applicationUrl": "https://localhost:44315",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
